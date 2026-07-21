@@ -1,6 +1,6 @@
-# Expo 앱에 오신 것을 환영합니다 👋
+# Expo 앱에 오신 것을 환영합니다
 
-> 💡 **알아두기: 프로젝트 생성 방식의 변화**
+> **알아두기: 프로젝트 생성 방식의 변화**
 > 과거에 자주 쓰이던 `expo init rn-photo` 명령어는 이제 사용하지 않습니다(deprecated).
 > 현재 프로젝트는 최신 권장 방식인 `npx create-expo-app rn-photo` 명령어를 통해 생성된 [Expo](https://expo.dev) 프로젝트입니다.
 
