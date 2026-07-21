@@ -1,56 +1,60 @@
-# Welcome to your Expo app 👋
+# Expo 앱에 오신 것을 환영합니다 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> 💡 **알아두기: 프로젝트 생성 방식의 변화**
+> 과거에 자주 쓰이던 `expo init rn-photo` 명령어는 이제 사용하지 않습니다(deprecated).
+> 현재 프로젝트는 최신 권장 방식인 `npx create-expo-app rn-photo` 명령어를 통해 생성된 [Expo](https://expo.dev) 프로젝트입니다.
 
-## Get started
+이 프로젝트를 처음 생성하셨거나 내려받으셨다면, 앱을 실행하기 위해 아래의 단계를 따라주세요.
 
-1. Install dependencies
+## 시작하기 (초기 설정 및 실행)
+
+1. 종속성 설치하기
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. 앱 실행하기
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+출력되는 내용에서 다음 환경으로 앱을 열 수 있는 옵션을 확인할 수 있습니다.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- [개발 빌드 (development build)](https://docs.expo.dev/develop/development-builds/introduction/)
+- [안드로이드 에뮬레이터 (Android emulator)](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS 시뮬레이터 (iOS simulator)](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), Expo로 앱 개발을 체험해 볼 수 있는 제한된 샌드박스 환경
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**app** 디렉터리 내의 파일들을 수정하여 개발을 시작할 수 있습니다. 이 프로젝트는 [파일 기반 라우팅 (file-based routing)](https://docs.expo.dev/router/introduction)을 사용합니다.
 
-## Get a fresh project
+## 새로운 프로젝트로 시작하기
 
-When you're ready, run:
+준비가 되면 다음 명령어를 실행하세요:
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+이 명령어는 초기 시작 코드를 **app-example** 디렉터리로 이동시키고, 개발을 시작할 수 있도록 비어 있는 새로운 **app** 디렉터리를 생성합니다.
 
-### Other setup steps
+### 기타 설정 단계
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- 린팅(Linting)을 위해 ESLint를 설정하려면 `npx expo lint`를 실행하거나 ["ESLint 및 Prettier 사용하기"](https://docs.expo.dev/guides/using-eslint/) 가이드를 따르세요.
+- 단위 테스트를 설정하려면 ["Jest를 사용한 단위 테스트"](https://docs.expo.dev/develop/unit-testing/) 가이드를 참조하세요.
+- 이 템플릿의 TypeScript 설정에 대해 더 자세히 알아보려면 ["TypeScript 사용하기"](https://docs.expo.dev/guides/typescript/) 가이드를 확인하세요.
 
-## Learn more
+## 더 알아보기
 
-To learn more about developing your project with Expo, look at the following resources:
+Expo를 사용한 프로젝트 개발에 대해 더 자세히 알아보려면 다음 리소스를 참고하세요:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- [Expo 공식 문서](https://docs.expo.dev/): 기초를 배우거나 [가이드](https://docs.expo.dev/guides)를 통해 고급 주제를 다뤄보세요.
+- [Expo 튜토리얼 배우기](https://docs.expo.dev/tutorial/introduction/): 안드로이드, iOS 및 웹에서 실행되는 프로젝트를 생성하는 단계별 튜토리얼을 따라 해보세요.
 
-## Join the community
+## 커뮤니티 참여하기
 
-Join our community of developers creating universal apps.
+유니버설 앱을 개발하는 개발자 커뮤니티에 참여하세요.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [GitHub의 Expo](https://github.com/expo/expo): 오픈소스 플랫폼을 확인하고 기여해 보세요.
+- [Discord 커뮤니티](https://chat.expo.dev): Expo 사용자들과 채팅하고 질문할 수 있습니다.
