@@ -1,0 +1,29 @@
+From 3d39fe0b6712d6d700921caf51c61415fab1c26d Mon Sep 17 00:00:00 2001
+From: sbjwin <sbjwin4271@gmail.com>
+Date: Tue, 21 Jul 2026 14:40:22 +0900
+Subject: [PATCH] =?UTF-8?q?fix:=20READMD.md=20=EC=97=90=EC=84=9C=20?=
+ =?UTF-8?q?=EB=AA=87=EA=B0=80=EC=A7=80=20=EC=88=98=EC=A0=95?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ README.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/README.md b/README.md
+index f59fc8e..2f123a2 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+-# Expo 앱에 오신 것을 환영합니다 👋
++# Expo 앱에 오신 것을 환영합니다
+ 
+-> 💡 **알아두기: 프로젝트 생성 방식의 변화**
++> **알아두기: 프로젝트 생성 방식의 변화**
+ > 과거에 자주 쓰이던 `expo init rn-photo` 명령어는 이제 사용하지 않습니다(deprecated).
+ > 현재 프로젝트는 최신 권장 방식인 `npx create-expo-app rn-photo` 명령어를 통해 생성된 [Expo](https://expo.dev) 프로젝트입니다.
+ 
+-- 
+2.55.0.windows.2
+
