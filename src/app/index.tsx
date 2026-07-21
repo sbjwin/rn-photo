@@ -25,11 +25,18 @@ function getDevMenuHint() {
   );
 }
 
+import { Image } from 'react-native';
+
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { backgroundColor: '#F97316' }]}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
+        <ThemedView style={[styles.heroSection, { backgroundColor: 'transparent' }]}>
+          <Image
+            source={require('@/assets/images/adaptive-icon.png')}
+            style={{ width: 150, height: 150, marginBottom: 20 }}
+            resizeMode="contain"
+          />
           <ThemedText type="title" style={styles.title}>
             Photo App
           </ThemedText>
