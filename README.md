@@ -45,6 +45,35 @@ npm run reset-project
 - 단위 테스트를 설정하려면 ["Jest를 사용한 단위 테스트"](https://docs.expo.dev/develop/unit-testing/) 가이드를 참조하세요.
 - 이 템플릿의 TypeScript 설정에 대해 더 자세히 알아보려면 ["TypeScript 사용하기"](https://docs.expo.dev/guides/typescript/) 가이드를 확인하세요.
 
+#### React Hooks ESLint 플러그인 설정 가이드 (권장)
+
+React 컴포넌트 개발 시 Hooks의 규칙(Rules of Hooks)을 위반하여 발생하는 버그를 미연에 방지하려면 플러그인 추가가 필요합니다.
+
+1. **플러그인 설치하기**:
+   터미널에서 아래 명령어를 실행하여 개발 의존성으로 설치합니다.
+   ```bash
+   npm install -D eslint-plugin-react-hooks
+   ```
+
+2. **ESLint 환경 설정하기**:
+   프로젝트 루트의 `eslint.config.mjs` (또는 `.eslintrc.js` 등 사용하는 설정 파일)를 열고 아래와 같이 플러그인과 규칙을 추가합니다.
+   
+   ```javascript
+   import reactHooks from 'eslint-plugin-react-hooks';
+
+   export default [
+     // ... 기존 설정 내용 ...
+     {
+       plugins: {
+         'react-hooks': reactHooks,
+       },
+       rules: {
+         ...reactHooks.configs.recommended.rules,
+       },
+     },
+   ];
+   ```
+
 ## 더 알아보기
 
 Expo를 사용한 프로젝트 개발에 대해 더 자세히 알아보려면 다음 리소스를 참고하세요:
