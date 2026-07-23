@@ -1,33 +1,31 @@
-import { useRouter } from 'expo-router';
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 export default function HomeScreen() {
   const router = useRouter();
 
+  const handleLogout = () => {
+    // 로그아웃 로직 처리 후 웰컴(랜딩) 화면으로 돌아갑니다.
+    router.replace('/welcome');
+  };
+
   return (
-    <ThemedView style={[styles.container, { backgroundColor: '#F97316' }]}>
+    <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={[styles.heroSection, { backgroundColor: 'transparent' }]}>
-          <Image
-            source={require('@/assets/images/adaptive-icon.png')}
-            style={{ width: 150, height: 150, marginBottom: 20 }}
-            resizeMode="contain"
-          />
-          <ThemedText type="title" style={styles.title}>
-            Photo App
-          </ThemedText>
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => router.push('/sign-in')}
-          >
-            <Text style={styles.loginButtonText}>로그인</Text>
-          </TouchableOpacity>
-        </ThemedView>
+        <ThemedText type="title" style={styles.title}>
+          메인 피드 화면
+        </ThemedText>
+        <ThemedText style={styles.subtitle}>
+          로그인을 성공적으로 완료했습니다! 🎉
+        </ThemedText>
+        
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutButtonText}>로그아웃</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </ThemedView>
   );
@@ -36,47 +34,29 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
   },
   safeArea: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    paddingHorizontal: 20,
   },
   title: {
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-  loginButton: {
-    backgroundColor: '#ffffff',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 25,
-    marginTop: 10,
-  },
-  loginButtonText: {
-    color: '#F97316',
+  subtitle: {
     fontSize: 16,
+    color: '#666',
+    marginBottom: 40,
+  },
+  logoutButton: {
+    backgroundColor: '#eee',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  logoutButtonText: {
+    color: '#333',
     fontWeight: 'bold',
   }
 });

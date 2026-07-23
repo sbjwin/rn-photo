@@ -9,8 +9,8 @@ export default function RootLayout() {
   return (
     <>
       <AnimatedSplashOverlay />
-      <Stack screenOptions={{ headerShown: false }}>
-        {/* (main) 그룹과 (auth) 그룹을 등록하고 화면 옵션을 설정할 수 있습니다 */}
+      <Stack screenOptions={{ headerShown: false }} initialRouteName="welcome">
+        <Stack.Screen name="welcome" />
         <Stack.Screen name="(main)" />
         <Stack.Screen name="(auth)" />
       </Stack>
