@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 
 export default function SignInScreen() {
@@ -17,18 +17,18 @@ export default function SignInScreen() {
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedText type="title" style={{ marginBottom: 40 }}>로그인</ThemedText>
-            
-            <TextInput 
-                style={styles.input} 
+            <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
+
+            <TextInput
+                style={styles.input}
                 placeholder="이메일 또는 아이디"
                 placeholderTextColor="#999"
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
             />
-            <TextInput 
-                style={styles.input} 
+            <TextInput
+                style={styles.input}
                 placeholder="비밀번호"
                 placeholderTextColor="#999"
                 secureTextEntry
@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 20,
+    },
+    titleText: {
+        marginBottom: 40,
+        textAlign: 'center',
     },
     input: {
         height: 50,
