@@ -3,7 +3,7 @@ import { ThemedView } from "@/components/themed-view";
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View, ImageBackground } from "react-native";
 
 export default function SignInScreen() {
     const router = useRouter();
@@ -34,8 +34,13 @@ export default function SignInScreen() {
     };
 
     return (
-        <ThemedView style={styles.container}>
-            <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
+        <ImageBackground 
+            source={require('@/assets/images/login-bg.png')}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+        >
+            <View style={styles.overlay}>
+                <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
 
             {errorMessage ? (
                 <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
@@ -72,15 +77,21 @@ export default function SignInScreen() {
             <TouchableOpacity style={styles.signupButton} onPress={() => router.push('/sign-up')}>
                 <ThemedText style={styles.signupButtonText}>계정이 없으신가요? 회원가입</ThemedText>
             </TouchableOpacity>
-        </ThemedView>
+        </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
+        flex: 1,
+        width: '100%',
+    },
+    overlay: {
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 20,
+        backgroundColor: 'rgba(0,0,0,0.4)', // 반투명한 검은색을 덮어 글씨가 잘 보이게 합니다.
     },
     titleText: {
         marginBottom: 20,
