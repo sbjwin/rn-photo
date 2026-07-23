@@ -1,8 +1,9 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function SignInScreen() {
     const router = useRouter();
@@ -19,22 +20,29 @@ export default function SignInScreen() {
         <ThemedView style={styles.container}>
             <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
 
-            <TextInput
-                style={styles.input}
-                placeholder="이메일 또는 아이디"
-                placeholderTextColor="#999"
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="비밀번호"
-                placeholderTextColor="#999"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-            />
+            <View style={styles.inputContainer}>
+                <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
+                <TextInput
+                    style={styles.input}
+                    placeholder="이메일 또는 아이디"
+                    placeholderTextColor="#999"
+                    value={email}
+                    onChangeText={setEmail}
+                    autoCapitalize="none"
+                />
+            </View>
+
+            <View style={styles.inputContainer}>
+                <Ionicons name="lock-closed-outline" size={20} color="#999" style={styles.icon} />
+                <TextInput
+                    style={styles.input}
+                    placeholder="비밀번호"
+                    placeholderTextColor="#999"
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
+                />
+            </View>
 
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                 <ThemedText style={styles.loginButtonText}>로그인</ThemedText>
@@ -57,7 +65,9 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         textAlign: 'center',
     },
-    input: {
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         height: 50,
         borderWidth: 1,
         borderColor: '#ccc',
@@ -65,7 +75,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         marginBottom: 15,
         backgroundColor: '#fff',
+    },
+    icon: {
+        marginRight: 10,
+    },
+    input: {
+        flex: 1,
         fontSize: 16,
+        color: '#333',
     },
     loginButton: {
         backgroundColor: '#F97316',
