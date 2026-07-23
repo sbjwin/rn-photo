@@ -1,4 +1,5 @@
-import { Image, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Button, Image, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -6,6 +7,8 @@ import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   return (
     <ThemedView style={[styles.container, { backgroundColor: '#F97316' }]}>
       <SafeAreaView style={styles.safeArea}>
@@ -18,6 +21,7 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Photo App
           </ThemedText>
+          <Button title="로그인" onPress={() => router.push('/sign-in')} color="#ffffff" />
         </ThemedView>
       </SafeAreaView>
     </ThemedView>

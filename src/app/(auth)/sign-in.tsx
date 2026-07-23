@@ -8,7 +8,7 @@ export default function SignInScreen() {
     return (
         <ThemedView style={styles.container}>
             <ThemedText type="title" style={{ marginBottom: 20 }}>Sign In</ThemedText>
-            <Button title="Sign Up" onPress={() => router.push('/')} />
+            <Button title="Sign Up" onPress={() => router.push('/sign-up')} />
         </ThemedView>
     );
 }
