@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 20,
-        backgroundColor: 'rgba(0,0,0,0.4)', // 반투명한 검은색을 덮어 글씨가 잘 보이게 합니다.
+        backgroundColor: 'rgba(0,0,0,0.15)', // 밝은 하와이 해변이 잘 보이도록 오버레이를 아주 연하게 수정했습니다.
     },
     titleText: {
         marginBottom: 20,
