@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { Button, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -21,7 +21,12 @@ export default function HomeScreen() {
           <ThemedText type="title" style={styles.title}>
             Photo App
           </ThemedText>
-          <Button title="로그인" onPress={() => router.push('/sign-in')} color="#ffffff" />
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => router.push('/sign-in')}
+          >
+            <Text style={styles.loginButtonText}>로그인</Text>
+          </TouchableOpacity>
         </ThemedView>
       </SafeAreaView>
     </ThemedView>
@@ -62,4 +67,16 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
   },
+  loginButton: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 25,
+    marginTop: 10,
+  },
+  loginButtonText: {
+    color: '#F97316',
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
 });
