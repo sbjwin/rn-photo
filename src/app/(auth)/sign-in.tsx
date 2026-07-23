@@ -9,8 +9,25 @@ export default function SignInScreen() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleLogin = () => {
+        setErrorMessage(""); // 에러 메시지 초기화
+
+        // 이메일 형식 검사
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorMessage("올바른 이메일 형식을 입력해 주세요.");
+            return;
+        }
+
+        // 비밀번호 형식 검사: 8자 이상, 문자, 숫자, 특수문자 포함
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            setErrorMessage("비밀번호는 8자 이상이며 문자, 숫자, 특수문자를 모두 포함해야 합니다.");
+            return;
+        }
+
         // 실제 로그인 로직이 들어갈 자리입니다.
         // 로그인이 성공하면 메인 화면('/')으로 이동시킵니다.
         router.replace('/');
@@ -19,6 +36,10 @@ export default function SignInScreen() {
     return (
         <ThemedView style={styles.container}>
             <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
+
+            {errorMessage ? (
+                <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
+            ) : null}
 
             <View style={styles.inputContainer}>
                 <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
@@ -62,8 +83,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     titleText: {
-        marginBottom: 40,
+        marginBottom: 20,
         textAlign: 'center',
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 20,
+        textAlign: 'center',
+        fontSize: 14,
     },
     inputContainer: {
         flexDirection: 'row',
