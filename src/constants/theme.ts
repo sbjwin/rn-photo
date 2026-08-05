@@ -7,6 +7,10 @@ import '@/global.css';
 
 import { Platform } from 'react-native';
 
+// 공통 기본 색상 상수 추가
+export const WHITE = '#ffffff';
+export const BLACK = '#000000';
+
 export const Colors = {
   light: {
     text: '#000000',

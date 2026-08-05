@@ -2,6 +2,7 @@
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { WHITE } from "@/constants/theme";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 
 export default function SignUpScreen() {
     const router = useRouter();
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ export default function SignUpScreen() {
         <SafeAreaView style={{ flex: 1 }}>
             <StatusBar style="light" />
             <ThemedView style={[styles.container, { paddingTop: top }]}>
+                {/* cover image */}
                 <View style={StyleSheet.absoluteFill}>
                     <Image
                         source={require('@/assets/images/cover.png')}
@@ -32,7 +34,15 @@ export default function SignUpScreen() {
                         resizeMode="cover"
                     />
                 </View>
-                <ThemedText style={styles.title}>Sign Up</ThemedText>
+                {/* useSafeAreaInsets 에서 top, bottom을 추출해서 사용 */}
+                <View
+                    style={[
+                        styles.form,
+                        { paddingBottom: bottom ? bottom + 10 : 40 },
+                    ]}
+                >
+                    <ThemedText>Input</ThemedText>
+                </View>
             </ThemedView>
         </SafeAreaView>
     );
@@ -49,5 +59,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20
+    },
+    form: {
+        alignItems: 'center',
+        backgroundColor: WHITE,
+        paddingHorizontal: 20,
+        paddingTop: 40,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     }
 });
