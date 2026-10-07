@@ -2,10 +2,23 @@ import { ThemedText } from "@/components/themed-text";
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View, ImageBackground } from "react-native";
+import {
+    ImageBackground,
+    Keyboard,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function SignInScreen() {
     const router = useRouter();
+    const { top, bottom } = useSafeAreaInsets();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -27,8 +40,7 @@ export default function SignInScreen() {
             return;
         }
 
-        // 실제 로그인 로직이 들어갈 자리입니다.
-        // 로그인이 성공하면 메인 화면('/')으로 이동시킵니다.
+        // 실제 로그인 로직 처리 후 메인 화면으로 이동
         router.replace('/');
     };
 
@@ -38,45 +50,64 @@ export default function SignInScreen() {
             style={styles.backgroundImage}
             resizeMode="cover"
         >
-            <View style={styles.overlay}>
-                <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <KeyboardAvoidingView 
+                    style={styles.keyboardContainer}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                >
+                    <ScrollView 
+                        contentContainerStyle={[
+                            styles.scrollContent,
+                            { paddingTop: top + 20, paddingBottom: (bottom || 20) + 20 }
+                        ]}
+                        keyboardShouldPersistTaps="handled"
+                        showsVerticalScrollIndicator={false}
+                        bounces={false}
+                    >
+                        <View style={styles.cardContainer}>
+                            <ThemedText type="title" style={styles.titleText}>로그인</ThemedText>
 
-            {errorMessage ? (
-                <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
-            ) : null}
+                            {errorMessage ? (
+                                <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
+                            ) : null}
 
-            <View style={styles.inputContainer}>
-                <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
-                <TextInput
-                    style={styles.input}
-                    placeholder="이메일 또는 아이디"
-                    placeholderTextColor="#999"
-                    value={email}
-                    onChangeText={setEmail}
-                    autoCapitalize="none"
-                />
-            </View>
+                            <View style={styles.inputContainer}>
+                                <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="이메일 또는 아이디"
+                                    placeholderTextColor="#999"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    autoCapitalize="none"
+                                    keyboardType="email-address"
+                                />
+                            </View>
 
-            <View style={styles.inputContainer}>
-                <Ionicons name="lock-closed-outline" size={20} color="#999" style={styles.icon} />
-                <TextInput
-                    style={styles.input}
-                    placeholder="비밀번호"
-                    placeholderTextColor="#999"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
-                />
-            </View>
+                            <View style={styles.inputContainer}>
+                                <Ionicons name="lock-closed-outline" size={20} color="#999" style={styles.icon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="비밀번호"
+                                    placeholderTextColor="#999"
+                                    secureTextEntry
+                                    value={password}
+                                    onChangeText={setPassword}
+                                />
+                            </View>
 
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                <ThemedText style={styles.loginButtonText}>로그인</ThemedText>
-            </TouchableOpacity>
+                            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+                                <ThemedText style={styles.loginButtonText}>로그인</ThemedText>
+                            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.signupButton} onPress={() => router.push('/sign-up')}>
-                <ThemedText style={styles.signupButtonText}>계정이 없으신가요? 회원가입</ThemedText>
-            </TouchableOpacity>
-        </View>
+                            <TouchableOpacity style={styles.signupButton} onPress={() => router.push('/sign-up')}>
+                                <ThemedText style={styles.signupButtonText}>계정이 없으신가요? 회원가입</ThemedText>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </ImageBackground>
     );
 }
@@ -86,11 +117,17 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    overlay: {
+    keyboardContainer: {
         flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.15)',
+    },
+    scrollContent: {
+        flexGrow: 1,
         justifyContent: 'center',
         paddingHorizontal: 20,
-        backgroundColor: 'rgba(0,0,0,0.15)', // 밝은 하와이 해변이 잘 보이도록 오버레이를 아주 연하게 수정했습니다.
+    },
+    cardContainer: {
+        width: '100%',
     },
     titleText: {
         marginBottom: 20,
@@ -141,5 +178,6 @@ const styles = StyleSheet.create({
     signupButtonText: {
         color: '#F97316',
         fontSize: 14,
+        fontWeight: '600',
     }
 });

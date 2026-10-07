@@ -9,12 +9,14 @@ import { useState } from "react";
 import {
     ActivityIndicator,
     Image,
+    Keyboard,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
     StyleSheet,
     TextInput,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     View
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -77,97 +79,101 @@ export default function SignUpScreen() {
                 <View style={styles.coverOverlay} />
             </View>
 
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                style={styles.keyboardView}
-            >
-                <ScrollView
-                    contentContainerStyle={[
-                        styles.scrollContent,
-                        { paddingTop: top + 40, paddingBottom: (bottom || 20) + 10 }
-                    ]}
-                    keyboardShouldPersistTaps="handled"
-                    bounces={false}
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    style={styles.keyboardView}
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
                 >
-                    <View style={styles.headerArea}>
-                        <ThemedText style={styles.headerTitle}>새 계정 만들기</ThemedText>
-                        <ThemedText style={styles.headerSubtitle}>사진을 공유하고 소통해 보세요</ThemedText>
-                    </View>
-
-                    {/* 회원가입 폼 카드 */}
-                    <View style={styles.formCard}>
-                        {errorMessage ? (
-                            <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
-                        ) : null}
-
-                        {/* 이메일 입력 */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="이메일 주소"
-                                placeholderTextColor="#999"
-                                value={email}
-                                onChangeText={setEmail}
-                                autoCapitalize="none"
-                                keyboardType="email-address"
-                            />
+                    <ScrollView
+                        contentContainerStyle={[
+                            styles.scrollContent,
+                            { paddingTop: top + 20, paddingBottom: (bottom || 20) + 20 }
+                        ]}
+                        keyboardShouldPersistTaps="handled"
+                        showsVerticalScrollIndicator={false}
+                        bounces={false}
+                    >
+                        <View style={styles.headerArea}>
+                            <ThemedText style={styles.headerTitle}>새 계정 만들기</ThemedText>
+                            <ThemedText style={styles.headerSubtitle}>사진을 공유하고 소통해 보세요</ThemedText>
                         </View>
 
-                        {/* 비밀번호 입력 */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="lock-closed-outline" size={20} color="#999" style={styles.icon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="비밀번호 (8자 이상, 문자/숫자/특수문자)"
-                                placeholderTextColor="#999"
-                                secureTextEntry
-                                value={password}
-                                onChangeText={setPassword}
-                            />
+                        {/* 회원가입 폼 카드 */}
+                        <View style={styles.formCard}>
+                            {errorMessage ? (
+                                <ThemedText style={styles.errorText}>{errorMessage}</ThemedText>
+                            ) : null}
+
+                            {/* 이메일 입력 */}
+                            <View style={styles.inputContainer}>
+                                <Ionicons name="mail-outline" size={20} color="#999" style={styles.icon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="이메일 주소"
+                                    placeholderTextColor="#999"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    autoCapitalize="none"
+                                    keyboardType="email-address"
+                                />
+                            </View>
+
+                            {/* 비밀번호 입력 */}
+                            <View style={styles.inputContainer}>
+                                <Ionicons name="lock-closed-outline" size={20} color="#999" style={styles.icon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="비밀번호 (8자 이상, 문자/숫자/특수문자)"
+                                    placeholderTextColor="#999"
+                                    secureTextEntry
+                                    value={password}
+                                    onChangeText={setPassword}
+                                />
+                            </View>
+
+                            {/* 비밀번호 확인 입력 */}
+                            <View style={styles.inputContainer}>
+                                <Ionicons name="shield-checkmark-outline" size={20} color="#999" style={styles.icon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="비밀번호 확인"
+                                    placeholderTextColor="#999"
+                                    secureTextEntry
+                                    value={passwordConfirm}
+                                    onChangeText={setPasswordConfirm}
+                                />
+                            </View>
+
+                            {/* 회원가입 버튼 */}
+                            <TouchableOpacity
+                                style={[
+                                    styles.submitButton,
+                                    (disable || isLoading) && styles.submitButtonDisabled
+                                ]}
+                                onPress={handleSignUp}
+                                disabled={disable || isLoading}
+                            >
+                                {isLoading ? (
+                                    <ActivityIndicator color="#fff" />
+                                ) : (
+                                    <ThemedText style={styles.submitButtonText}>가입하기</ThemedText>
+                                )}
+                            </TouchableOpacity>
+
+                            {/* 로그인 화면으로 이동 */}
+                            <TouchableOpacity
+                                style={styles.signInLink}
+                                onPress={() => router.back()}
+                            >
+                                <ThemedText style={styles.signInLinkText}>
+                                    이미 계정이 있으신가요? <ThemedText style={styles.signInLinkHighlight}>로그인</ThemedText>
+                                </ThemedText>
+                            </TouchableOpacity>
                         </View>
-
-                        {/* 비밀번호 확인 입력 */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="shield-checkmark-outline" size={20} color="#999" style={styles.icon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="비밀번호 확인"
-                                placeholderTextColor="#999"
-                                secureTextEntry
-                                value={passwordConfirm}
-                                onChangeText={setPasswordConfirm}
-                            />
-                        </View>
-
-                        {/* 회원가입 버튼 */}
-                        <TouchableOpacity
-                            style={[
-                                styles.submitButton,
-                                (disable || isLoading) && styles.submitButtonDisabled
-                            ]}
-                            onPress={handleSignUp}
-                            disabled={disable || isLoading}
-                        >
-                            {isLoading ? (
-                                <ActivityIndicator color="#fff" />
-                            ) : (
-                                <ThemedText style={styles.submitButtonText}>가입하기</ThemedText>
-                            )}
-                        </TouchableOpacity>
-
-                        {/* 로그인 화면으로 이동 */}
-                        <TouchableOpacity
-                            style={styles.signInLink}
-                            onPress={() => router.back()}
-                        >
-                            <ThemedText style={styles.signInLinkText}>
-                                이미 계정이 있으신가요? <ThemedText style={styles.signInLinkHighlight}>로그인</ThemedText>
-                            </ThemedText>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </KeyboardAvoidingView>
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </View>
     );
 }
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
     },
     headerArea: {
         paddingHorizontal: 24,
-        marginBottom: 24,
+        marginBottom: 20,
     },
     headerTitle: {
         fontSize: 30,
