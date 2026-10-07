@@ -5,7 +5,7 @@ import { ThemedView } from "@/components/themed-view";
 import { WHITE } from "@/constants/theme";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -16,11 +16,7 @@ export default function SignUpScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [disable, setDisable] = useState(false);
-
-    useEffect(() => {
-        setDisable(!email || !password);
-    }, [email, password]);
+    const disable = !email || !password;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

@@ -4,8 +4,8 @@ import { useColorScheme } from 'react-native';
 import { Colors } from '@/constants/theme';
 
 export default function AppTabs() {
-  const scheme = useColorScheme() ?? 'light';
-  const colors = Colors[scheme];
+  const scheme = useColorScheme();
+  const colors = scheme === 'dark' ? Colors.dark : Colors.light;
 
   return (
     <NativeTabs
@@ -13,9 +13,7 @@ export default function AppTabs() {
       indicatorColor={colors.backgroundElement}
       labelStyle={{ selected: { color: colors.text } }}>
       <NativeTabs.Trigger name="index">
-        {/* @ts-expect-error: expo-router/unstable-native-tabs missing types */}
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        {/* @ts-expect-error: expo-router/unstable-native-tabs missing types */}
         <NativeTabs.Trigger.Icon
           src={require('@/assets/images/tabIcons/home.png')}
           renderingMode="template"
@@ -23,9 +21,7 @@ export default function AppTabs() {
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="explore">
-        {/* @ts-expect-error: expo-router/unstable-native-tabs missing types */}
         <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        {/* @ts-expect-error: expo-router/unstable-native-tabs missing types */}
         <NativeTabs.Trigger.Icon
           src={require('@/assets/images/tabIcons/explore.png')}
           renderingMode="template"
